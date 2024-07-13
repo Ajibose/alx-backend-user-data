@@ -17,12 +17,12 @@ class Auth:
         if not path.endswith("/"):
             path += "/"
 
-        for exc in excluded_paths:
-            if exc.endswith("*"):
-                b = path.startswith(exc[0:-1])
+        for excluded in excluded_paths:
+            if excluded.endswith("*"):
+                truthy = path.startswith(excluded[0:-1])
             else:
-                b = path == exc
-            if b:
+                truthy = path == excluded
+            if truthy:
                 return False
 
         return True
