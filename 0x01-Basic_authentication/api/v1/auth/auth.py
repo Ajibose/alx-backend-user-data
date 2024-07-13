@@ -21,10 +21,10 @@ class Auth:
 
     def authorization_header(self, request=None) -> str:
         """Return the request authorization header"""
-        if request is None and not hasattr(request, 'authorization'):
+        if request is None or not hasattr(request, 'Authorization'):
             return
 
-        return request.authorization
+        return request.Authorization
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Stub method"""
