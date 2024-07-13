@@ -20,8 +20,11 @@ class Auth:
         return path not in excluded_paths
 
     def authorization_header(self, request=None) -> str:
-        """Stub method"""
-        return
+        """Return the request authorization header"""
+        if request is None and not hasattr(request, 'authorization'):
+            return
+
+        return request.authorization
 
     def current_user(self, request=None) -> TypeVar('User'):
         """Stub method"""
