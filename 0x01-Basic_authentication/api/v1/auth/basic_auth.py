@@ -28,10 +28,9 @@ class BasicAuth(Auth):
         if type(base64_authorization_header) == str:
             try:
                 data = base64.b64decode(base64_authorization_header)
+                return data.decode("utf-8")
             except Exception:
                 pass
-            else:
-                return data.decode("utf-8")
 
         return None
 
@@ -65,3 +64,20 @@ class BasicAuth(Auth):
                     return user
 
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """Get the current user"""
+        header = self.authorization_header(request)
+        if header:
+            base64_data = self.extract_base64_authorization_header(header)
+            if base64_data:
+                decoded_base64 = self.decode_base64_authorization_header(base64_data)
+                if decoded_base64:
+                    user_data = self.extract_user_credentials(decoded_base64)
+                    if user_data != (None, None):
+                        email = user_data[0]
+                        passwd = user_data[1]
+                        user = self.user_object_from_credentials(email, passwd)
+                        return user
+
+
