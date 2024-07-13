@@ -15,12 +15,9 @@ class Auth:
             return True
 
         if not path.endswith("/"):
-            path = path + "/"
+            path += "/"
 
-        if path in excluded_paths:
-            return False
-
-        return True
+        return path not in excluded_paths
 
     def authorization_header(self, request=None) -> str:
         """Stub method"""
