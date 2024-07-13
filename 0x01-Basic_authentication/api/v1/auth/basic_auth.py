@@ -42,7 +42,7 @@ class BasicAuth(Auth):
             if len(data_list) < 2:
                 return None, None
 
-            email = data_list[0]
+            email, passwd = data_list
             return email, passwd
 
         return None, None
