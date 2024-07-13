@@ -32,3 +32,11 @@ def unauthorized() -> None:
         Call the error handler for 401
     """
     abort(401, description='Unauthorized')
+
+
+@app_views.route('/forbidden/', strict_slashes=False)
+def forbidden() -> None:
+    """GET /api/v1/forbidden
+    Call the error handler for 403
+    """
+    abort(403, description='Forbidden')
