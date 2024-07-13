@@ -38,11 +38,11 @@ class BasicAuth(Auth):
             self, decoded_base64_authorization_header: str) -> (str, str):
         """Return thr user data from base64 decoded string"""
         if type(decoded_base64_authorization_header) == str:
-            data_list = decoded_base64_authorization_header.split(':')
+            data_list = decoded_base64_authorization_header.split(':', 1)
             if len(data_list) < 2:
                 return None, None
 
-            email, passwd = data_list
+            email = data_list[0]
             return email, passwd
 
         return None, None
@@ -85,5 +85,7 @@ class BasicAuth(Auth):
 
         email = user_data[0]
         passwd = user_data[1]
+        print(email, passwd)
         user = self.user_object_from_credentials(email, passwd)
+        print(user)
         return user
