@@ -74,11 +74,11 @@ class BasicAuth(Auth):
         base64_data = self.extract_base64_authorization_header(header)
         if not base64_data:
             return
-        
+
         decoded_base64 = self.decode_base64_authorization_header(base64_data)
         if not decoded_base64:
             return
-        
+
         user_data = self.extract_user_credentials(decoded_base64)
         if user_data == (None, None):
             return
