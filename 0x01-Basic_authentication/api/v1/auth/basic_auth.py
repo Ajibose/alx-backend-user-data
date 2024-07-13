@@ -45,4 +45,3 @@ class BasicAuth(Auth):
             return email, passwd
 
         return None, None
-
