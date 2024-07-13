@@ -2,7 +2,9 @@
 """
     Authentication module
 """
+from models.user import User
 from api.v1.auth.auth import Auth
+from typing import TypeVar
 import re
 import base64
 
@@ -45,3 +47,17 @@ class BasicAuth(Auth):
             return email, passwd
 
         return None, None
+
+    def user_object_from_credentials(
+            self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        """Find User instance based on his email and password"""
+        if user_email is None or user_pwd is None:
+            return None
+
+        obj = User.search({'email': user_email})
+
+        if len(obj) > 0:
+            if obj[0].is_valid_password(user_pwd):
+                return obj[0]
+
+        return None
