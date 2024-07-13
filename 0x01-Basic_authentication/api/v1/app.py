@@ -18,7 +18,7 @@ auth_mechanism = getenv('AUTH_TYPE')
 if auth_mechanism == 'auth':
     from api.v1.auth.auth import Auth
     auth = Auth()
-else if auth_mechanism == 'basic_auth':
+elif auth_mechanism == 'basic_auth':
     from api.v1.auth.basic_auth import BasicAuth
     auth = BasicAuth()
 
