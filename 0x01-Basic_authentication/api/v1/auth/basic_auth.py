@@ -3,6 +3,7 @@
     Authentication module
 """
 from models.user import User
+from models.base import DATA
 from api.v1.auth.auth import Auth
 from typing import TypeVar
 import re
@@ -55,6 +56,9 @@ class BasicAuth(Auth):
 
         if user_pwd is None or type(user_pwd) != str:
             return
+
+        if User not in DATA:
+            return None
 
         users = User.search({'email': user_email})
 
