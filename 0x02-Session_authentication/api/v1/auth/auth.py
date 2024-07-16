@@ -36,6 +36,11 @@ class Auth:
 
         return header
 
-    def current_user(self, request=None) -> TypeVar('User'):
-        """Stub method"""
-        return
+    def session_cookie(self, request=None):
+        """Return a cookie from a request"""
+        if request is None:
+            return
+
+        from os import getenv
+        cookie_name = getenv('SESSION_NAME')
+        return request.cookies.get(cookie_name)
