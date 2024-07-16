@@ -44,8 +44,11 @@ def before_request():
 
         if auth_mechanism != 'session_auth':
             request.current_user = auth.current_user(request)
-            if request.current_user is None:
-                abort(403, description='Forbidden')
+        else:
+            request.current_user = None
+
+        if request.current_user is None:
+            abort(403, description='Forbidden')
 
 
 @app.errorhandler(404)
