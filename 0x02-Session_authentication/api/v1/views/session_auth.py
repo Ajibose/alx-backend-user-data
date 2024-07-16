@@ -37,4 +37,4 @@ def session_login():
             resp.set_cookie(cookie, sid)
             return resp
 
-    return jsonify({"error": "wrong password"})
+    return jsonify({"error": "wrong password"}), 400
